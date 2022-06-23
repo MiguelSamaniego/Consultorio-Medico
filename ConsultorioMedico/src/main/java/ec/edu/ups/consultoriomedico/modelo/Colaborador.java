@@ -7,8 +7,8 @@ package ec.edu.ups.consultoriomedico.modelo;
 import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import java.util.Date;
 import java.util.GregorianCalendar;
-
 
 /**
  *
@@ -18,9 +18,8 @@ import java.util.GregorianCalendar;
 @Table(name = "colaborador")
 public class Colaborador extends Persona implements Serializable {
 
-    
     private String tipoColaborador;
-    
+
     public Colaborador() {
     }
 
@@ -28,7 +27,7 @@ public class Colaborador extends Persona implements Serializable {
         this.tipoColaborador = tipoColaborador;
     }
 
-    public Colaborador(String tipoColaborador, int id, String nombreCompleto, String cedula, String celular, String email, String direccion, boolean estado, GregorianCalendar fechaNacimiento) {
+    public Colaborador(String tipoColaborador, int id, String nombreCompleto, String cedula, String celular, String email, String direccion, boolean estado, Date fechaNacimiento) {
         super(id, nombreCompleto, cedula, celular, email, direccion, estado, fechaNacimiento);
         this.tipoColaborador = tipoColaborador;
     }
@@ -41,9 +40,4 @@ public class Colaborador extends Persona implements Serializable {
         this.tipoColaborador = tipoColaborador;
     }
 
-    
-
-   
-      
-    
 }

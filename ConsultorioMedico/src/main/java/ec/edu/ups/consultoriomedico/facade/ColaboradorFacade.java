@@ -5,7 +5,6 @@
 package ec.edu.ups.consultoriomedico.facade;
 
 import ec.edu.ups.consultoriomedico.modelo.Colaborador;
-import ec.edu.ups.consultoriomedico.modelo.Doctor;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

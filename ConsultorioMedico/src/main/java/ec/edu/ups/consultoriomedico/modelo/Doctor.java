@@ -4,12 +4,10 @@
  */
 package ec.edu.ups.consultoriomedico.modelo;
 
-import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 /**
  *
@@ -20,17 +18,15 @@ import java.util.GregorianCalendar;
 public class Doctor extends Persona implements Serializable {
 
     private String especialidad;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "doctor")
-    private Consulta consulta;
 
     public Doctor() {
     }
 
-    public Doctor(int id, String nombreCompleto, String cedula, String celular, String email, String direccion, boolean estado, GregorianCalendar fechaNacimiento) {
+    public Doctor(int id, String nombreCompleto, String cedula, String celular, String email, String direccion, boolean estado, Date fechaNacimiento) {
         super(id, nombreCompleto, cedula, celular, email, direccion, estado, fechaNacimiento);
     }
 
-    public Doctor(String especialidad, int id, String nombreCompleto, String cedula, String celular, String email, String direccion, boolean estado, GregorianCalendar fechaNacimiento) {
+    public Doctor(String especialidad, int id, String nombreCompleto, String cedula, String celular, String email, String direccion, boolean estado, Date fechaNacimiento) {
         super(id, nombreCompleto, cedula, celular, email, direccion, estado, fechaNacimiento);
         this.especialidad = especialidad;
     }

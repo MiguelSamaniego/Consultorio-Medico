@@ -15,7 +15,7 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.persistence.Transient;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -31,24 +31,20 @@ public class Persona implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
     private String nombreCompleto;
-    @Column//(name = "identificador", nullable = false, unique = true, length = 10)
+    @Column(name = "cedula", nullable = false, unique = true, length = 13)
     private String cedula;
-    @Column//(name = "celular", nullable = false, unique = true, length = 10)
     private String celular;
-    @Column//(name = "correo", nullable = false, unique = true)
     private String email;
     private String direccion;
-    @Transient
     private boolean estado;
     @Temporal(TemporalType.DATE)
-    private GregorianCalendar fechaNacimiento;
+    private Date fechaNacimiento;
 
     public Persona() {
     }
 
-    public Persona(int id, String nombreCompleto, String cedula, String celular, String email, String direccion, boolean estado, GregorianCalendar fechaNacimiento) {
+    public Persona(int id, String nombreCompleto, String cedula, String celular, String email, String direccion, boolean estado, Date fechaNacimiento) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.cedula = cedula;
@@ -115,11 +111,11 @@ public class Persona implements Serializable {
         this.estado = estado;
     }
 
-    public GregorianCalendar getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(GregorianCalendar fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -144,13 +140,11 @@ public class Persona implements Serializable {
         final Persona other = (Persona) obj;
         return this.id == other.id;
     }
-    
-    
 
-    
+    @Override
+    public String toString() {
+        return "Persona{" + "id=" + id + ", nombreCompleto=" + nombreCompleto + ", cedula=" + cedula + ", celular=" + celular + ", email=" + email + ", direccion=" + direccion + ", estado=" + estado + ", fechaNacimiento=" + fechaNacimiento + '}';
+    }
 
-    
-
-    
     
 }

@@ -4,8 +4,8 @@
  */
 package ec.edu.ups.consultoriomedico.beans;
 
-import ec.edu.ups.consultoriomedico.facade.PacienteFacade;
-import ec.edu.ups.consultoriomedico.modelo.Paciente;
+import ec.edu.ups.consultoriomedico.facade.ColaboradorFacade;
+import ec.edu.ups.consultoriomedico.modelo.Colaborador;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
@@ -22,65 +22,72 @@ import java.util.List;
  */
 @Named
 @SessionScoped
-public class PacienteBean implements Serializable{
+public class ColaboradorBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EJB
-    private PacienteFacade pacienteFacade;
-    private List<Paciente> list = new ArrayList<>();
-    private Paciente paciente;
+    private ColaboradorFacade colaboradorFacade;
+    private List<Colaborador> list = new ArrayList<>();
+    private Colaborador colaborador;
     private int id;
     private String nombreCompleto;
     private String cedula;
+    private String tipoColaborador;
     private String celular;
     private String email;
     private String direccion;
     private boolean estado;
     private Date fechaNacimiento;
-    private GregorianCalendar primerIngreso;
 
     @PostConstruct
     public void init() {
-        list = pacienteFacade.findAll();
+        list = colaboradorFacade.findAll();
+       // listaColaboradores();
     }
 
-    public String add() {
-        pacienteFacade.create(new Paciente(new GregorianCalendar(), id, nombreCompleto, cedula, celular, email, direccion, true, fechaNacimiento));
-        list = pacienteFacade.findAll();
-        this.limpiar();
-        return null;
-    }
-    
-     public List<Paciente> listaPacientes() {
-        List<Paciente> listasUuU = new ArrayList<>();//listar usu
-        for (Paciente paciente : list) {
-            if (paciente.isEstado()==true) {
-                listasUuU.add(paciente);
+    public List<Colaborador> listaColaboradores() {
+        List<Colaborador> listasUuU = new ArrayList<>();//listar usu
+        for (Colaborador colaborador : list) {
+            if (colaborador.isEstado()==true) {
+                listasUuU.add(colaborador);
             }
         }
         return listasUuU;
     }
     
-
-    public String delete(Paciente paciente) {
-        paciente.setEstado(false);
-        pacienteFacade.edit(paciente);
-        list = pacienteFacade.findAll();
+    public String add() {
+        colaboradorFacade.create(new Colaborador(tipoColaborador, id, nombreCompleto, cedula, celular, email, direccion, true, fechaNacimiento));
+        list = colaboradorFacade.findAll();
+        this.limpiar();
         return null;
     }
 
-    public String edit(Paciente paciente) {
-        pacienteFacade.edit(paciente);
-        list = pacienteFacade.findAll();
+    public String delete(Colaborador colaborador) {
+        colaborador.setEstado(false);
+         colaboradorFacade.edit(colaborador);
+        list = colaboradorFacade.findAll();
         return null;
     }
 
-    public Paciente[] getList() {
-        return list.toArray(new Paciente[0]);
+    public String edit(Colaborador colaborador) {
+        colaboradorFacade.edit(colaborador);
+        return null;
     }
 
-    public void setList(List<Paciente> list) {
+    public Colaborador[] getList() {
+        return list.toArray(new Colaborador[0]);
+    }
+
+    public void setList(List<Colaborador> list) {
         this.list = list;
+    }
+
+    public ColaboradorFacade getColaboradorFacade() {
+        return colaboradorFacade;
+    }
+
+    public void setColaboradorFacade(ColaboradorFacade colaboradorFacade) {
+        this.colaboradorFacade = colaboradorFacade;
     }
 
     public int getId() {
@@ -105,6 +112,14 @@ public class PacienteBean implements Serializable{
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
+    }
+
+    public String getTipoColaborador() {
+        return tipoColaborador;
+    }
+
+    public void setTipoColaborador(String tipoColaborador) {
+        this.tipoColaborador = tipoColaborador;
     }
 
     public String getCelular() {
@@ -147,20 +162,15 @@ public class PacienteBean implements Serializable{
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Colaborador getColaborador() {
+        return colaborador;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setColaborador(Colaborador colaborador) {
+        this.colaborador = colaborador;
     }
 
    
-     public Date fechaIngreso(Paciente paciente) {
-        Date fechaIngreso = paciente.getPrimerIngreso().getTime();
-
-        return fechaIngreso;
-    }
     
     public void limpiar() {
         this.nombreCompleto = "";
@@ -170,5 +180,4 @@ public class PacienteBean implements Serializable{
         this.direccion = "";
 
     }
-
 }

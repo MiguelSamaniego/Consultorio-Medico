@@ -4,8 +4,8 @@
  */
 package ec.edu.ups.consultoriomedico.beans;
 
-import ec.edu.ups.consultoriomedico.facade.PacienteFacade;
-import ec.edu.ups.consultoriomedico.modelo.Paciente;
+import ec.edu.ups.consultoriomedico.facade.DoctorFacade;
+import ec.edu.ups.consultoriomedico.modelo.Doctor;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
@@ -13,7 +13,6 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -22,65 +21,70 @@ import java.util.List;
  */
 @Named
 @SessionScoped
-public class PacienteBean implements Serializable{
+public class DoctorBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EJB
-    private PacienteFacade pacienteFacade;
-    private List<Paciente> list = new ArrayList<>();
-    private Paciente paciente;
+    private DoctorFacade doctorFacade;
+    private List<Doctor> list = new ArrayList<>();
     private int id;
     private String nombreCompleto;
     private String cedula;
+    private String especialidad;
     private String celular;
     private String email;
     private String direccion;
     private boolean estado;
     private Date fechaNacimiento;
-    private GregorianCalendar primerIngreso;
 
     @PostConstruct
     public void init() {
-        list = pacienteFacade.findAll();
+        list = doctorFacade.findAll();
     }
 
     public String add() {
-        pacienteFacade.create(new Paciente(new GregorianCalendar(), id, nombreCompleto, cedula, celular, email, direccion, true, fechaNacimiento));
-        list = pacienteFacade.findAll();
+        doctorFacade.create(new Doctor(especialidad, id, nombreCompleto, cedula, celular, email, direccion, true, fechaNacimiento));
+        list = doctorFacade.findAll();
         this.limpiar();
         return null;
     }
-    
-     public List<Paciente> listaPacientes() {
-        List<Paciente> listasUuU = new ArrayList<>();//listar usu
-        for (Paciente paciente : list) {
-            if (paciente.isEstado()==true) {
-                listasUuU.add(paciente);
+
+    public String delete(Doctor doctor) {
+        doctor.setEstado(false);
+        doctorFacade.edit(doctor);
+        list = doctorFacade.findAll();
+        return null;
+    }
+
+    public List<Doctor> listaDoctors() {
+        List<Doctor> listasUuU = new ArrayList<>();//listar usu
+        for (Doctor doctor : list) {
+            if (doctor.isEstado() == true) {
+                listasUuU.add(doctor);
             }
         }
         return listasUuU;
     }
-    
 
-    public String delete(Paciente paciente) {
-        paciente.setEstado(false);
-        pacienteFacade.edit(paciente);
-        list = pacienteFacade.findAll();
+    public String edit(Doctor doctor) {
+        doctorFacade.edit(doctor);
         return null;
     }
 
-    public String edit(Paciente paciente) {
-        pacienteFacade.edit(paciente);
-        list = pacienteFacade.findAll();
-        return null;
+    public Doctor[] getList() {
+        return list.toArray(new Doctor[0]);
     }
 
-    public Paciente[] getList() {
-        return list.toArray(new Paciente[0]);
-    }
-
-    public void setList(List<Paciente> list) {
+    public void setList(List<Doctor> list) {
         this.list = list;
+    }
+
+    public DoctorFacade getDoctorFacade() {
+        return doctorFacade;
+    }
+
+    public void setDoctorFacade(DoctorFacade doctorFacade) {
+        this.doctorFacade = doctorFacade;
     }
 
     public int getId() {
@@ -105,6 +109,14 @@ public class PacienteBean implements Serializable{
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
     }
 
     public String getCelular() {
@@ -147,28 +159,13 @@ public class PacienteBean implements Serializable{
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-   
-     public Date fechaIngreso(Paciente paciente) {
-        Date fechaIngreso = paciente.getPrimerIngreso().getTime();
-
-        return fechaIngreso;
-    }
-    
     public void limpiar() {
         this.nombreCompleto = "";
         this.cedula = "";
         this.celular = "";
         this.email = "";
         this.direccion = "";
-
+        this.estado = true;
     }
 
 }
