@@ -24,7 +24,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
                     <f:facet name="header">
                         <div class="p-d-flex p-jc-between p-ai-center">
-                            <h1>Lista de Colaboradores</h1>
+                            <h1 style="text-align: center;color: white">Lista de Colaboradores</h1>
                             <div>
                                 <p:commandButton styleClass="ui-button-success" id="toggler" type="button" value="Columnas" icon="pi pi-align-justify"/>
                                 <p:columnToggler datasource="products" trigger="toggler"/>
@@ -50,22 +50,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                         </p:cellEditor>
                     </p:column>
                     <p:column headerText="Celular">
-                         <p:cellEditor> 
+                        <p:cellEditor> 
                             <f:facet name="output">
                                 <h:outputText value="#{a.celular}" />
                             </f:facet>
                             <f:facet name="input">
-                                 <h:inputText value="#{a.celular}" />
+                                <h:inputText value="#{a.celular}" />
                             </f:facet> 
                         </p:cellEditor>
                     </p:column>
                     <p:column headerText="Direccion">
                         <p:cellEditor> 
                             <f:facet name="output">
-                               <h:outputText value="#{a.direccion}" />
+                                <h:outputText value="#{a.direccion}" />
                             </f:facet>
                             <f:facet name="input">
-                                 <h:inputText value="#{a.direccion}" />
+                                <h:inputText value="#{a.direccion}" />
                             </f:facet> 
                         </p:cellEditor>
                     </p:column>
@@ -73,16 +73,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <p:column headerText="Correo">
                         <p:cellEditor> 
                             <f:facet name="output">
-                              <h:outputText value="#{a.email}" />
+                                <h:outputText value="#{a.email}" />
                             </f:facet>
                             <f:facet name="input">
-                                 <h:inputText value="#{a.email}" />
+                                <h:inputText value="#{a.email}" />
                             </f:facet> 
                         </p:cellEditor>
-                       
+
                     </p:column>
 
-                     <p:column headerText="Tipo">
+                    <p:column headerText="Tipo">
                         <f:facet name="header">Tipo</f:facet> #{a.tipoColaborador}
                     </p:column>
                     <p:column headerText="Fecha de Nacimiento">
