@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Named
 @SessionScoped
-public class PacienteBean implements Serializable{
+public class PacienteBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EJB
@@ -50,20 +50,36 @@ public class PacienteBean implements Serializable{
         this.limpiar();
         return null;
     }
-    
-     public List<Paciente> listaPacientes() {
+
+    public List<Paciente> listaPacientes() {
         List<Paciente> listasUuU = new ArrayList<>();//listar usu
         for (Paciente paciente : list) {
-            if (paciente.isEstado()==true) {
+            if (paciente.isEstado() == true) {
                 listasUuU.add(paciente);
             }
         }
         return listasUuU;
     }
-    
+
+    public List<Paciente> listaPacientesBaja() {
+        List<Paciente> listasUuU = new ArrayList<>();//listar usu
+        for (Paciente paciente : list) {
+            if (paciente.isEstado() == false) {
+                listasUuU.add(paciente);
+            }
+        }
+        return listasUuU;
+    }
 
     public String delete(Paciente paciente) {
         paciente.setEstado(false);
+        pacienteFacade.edit(paciente);
+        list = pacienteFacade.findAll();
+        return null;
+    }
+
+    public String activar(Paciente paciente) {
+        paciente.setEstado(true);
         pacienteFacade.edit(paciente);
         list = pacienteFacade.findAll();
         return null;
@@ -155,13 +171,12 @@ public class PacienteBean implements Serializable{
         this.paciente = paciente;
     }
 
-   
-     public Date fechaIngreso(Paciente paciente) {
+    public Date fechaIngreso(Paciente paciente) {
         Date fechaIngreso = paciente.getPrimerIngreso().getTime();
 
         return fechaIngreso;
     }
-    
+
     public void limpiar() {
         this.nombreCompleto = "";
         this.cedula = "";
