@@ -6,6 +6,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Named
 @SessionScoped
-public class FacturaCompraCabeceraBean {
+public class FacturaCompraCabeceraBean implements Serializable{
 
     @EJB
     private FacturaCompraCabeceraFacade facturaCompraCabeceraFacade;

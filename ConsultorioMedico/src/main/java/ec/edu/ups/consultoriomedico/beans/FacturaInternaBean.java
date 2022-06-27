@@ -8,6 +8,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @Named
 @SessionScoped
-public class FacturaInternaBean {
+public class FacturaInternaBean implements Serializable {
     @EJB
     private FacturaInternaFacade facturaInternaFacade;
     private int id;

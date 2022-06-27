@@ -10,6 +10,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Named
 @SessionScoped
-public class FacturaCompraDetalleBean {
+public class FacturaCompraDetalleBean implements Serializable{
 
     @EJB
     private FacturaCompraDetalleFacade facturacompraDetalleFacade;
