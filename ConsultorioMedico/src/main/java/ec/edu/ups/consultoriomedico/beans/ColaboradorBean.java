@@ -23,7 +23,7 @@ import java.util.List;
 @Named
 @SessionScoped
 public class ColaboradorBean implements Serializable {
-
+//
     private static final long serialVersionUID = 1L;
     @EJB
     private ColaboradorFacade colaboradorFacade;
