@@ -6,6 +6,7 @@ package ec.edu.ups.consultoriomedico.beans;
 
 import ec.edu.ups.consultoriomedico.facade.ColaboradorFacade;
 import ec.edu.ups.consultoriomedico.modelo.Colaborador;
+import ec.edu.ups.consultoriomedico.modelo.Persona;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
@@ -13,7 +14,6 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -29,6 +29,7 @@ public class ColaboradorBean implements Serializable {
     private ColaboradorFacade colaboradorFacade;
     private List<Colaborador> list = new ArrayList<>();
     private Colaborador colaborador;
+    private Persona persona;
     private int id;
     private String nombreCompleto;
     private String cedula;
@@ -56,6 +57,9 @@ public class ColaboradorBean implements Serializable {
     }
     
     public String add() {
+        Persona persona = new Persona(id, nombreCompleto, cedula, celular, email, direccion, estado, fechaNacimiento);
+        persona.getCedula();
+        persona.getCelular();
         colaboradorFacade.create(new Colaborador(tipoColaborador, id, nombreCompleto, cedula, celular, email, direccion, true, fechaNacimiento));
         list = colaboradorFacade.findAll();
         this.limpiar();
