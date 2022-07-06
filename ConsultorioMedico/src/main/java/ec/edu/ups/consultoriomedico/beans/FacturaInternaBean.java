@@ -20,6 +20,7 @@ import java.util.List;
 @Named
 @SessionScoped
 public class FacturaInternaBean implements Serializable {
+
     @EJB
     private FacturaInternaFacade facturaInternaFacade;
     private int id;
@@ -30,13 +31,28 @@ public class FacturaInternaBean implements Serializable {
     private double iva;
     private double total;
     private List<FacturaInterna> listFacturaIn = new ArrayList<>();
+
     @PostConstruct
-    public void init(){
-        listFacturaIn=facturaInternaFacade.findAll();
+    public void init() {
+        listFacturaIn = facturaInternaFacade.findAll();
     }
-    
-    
-    
+
+    public String add() {
+        facturaInternaFacade.create(new FacturaInterna(id, fecha, paciente, doctor, subtotal, iva, total));
+        listFacturaIn = facturaInternaFacade.findAll();
+        return null;
+    }
+
+    public String delete(FacturaInterna f) {
+        facturaInternaFacade.remove(f);
+        listFacturaIn = facturaInternaFacade.findAll();
+        return null;
+    }
+
+    public void edit(FacturaInterna f) {
+        facturaInternaFacade.edit(f);
+        listFacturaIn = facturaInternaFacade.findAll();
+    }
 
     public FacturaInternaFacade getFacturaInternaFacade() {
         return facturaInternaFacade;
@@ -101,5 +117,13 @@ public class FacturaInternaBean implements Serializable {
     public void setTotal(double total) {
         this.total = total;
     }
-    
+
+    public FacturaInterna[] getList() {
+        return listFacturaIn.toArray(new FacturaInterna[0]);
+    }
+
+    public void setListFacturaIn(List<FacturaInterna> listFacturaIn) {
+        this.listFacturaIn = listFacturaIn;
+    }
+
 }

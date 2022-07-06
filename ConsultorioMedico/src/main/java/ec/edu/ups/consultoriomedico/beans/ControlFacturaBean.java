@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Named
 @SessionScoped
-public class ControlFacturaBean implements Serializable{
+public class ControlFacturaBean implements Serializable {
 
     @EJB
     private ControlFacturaFacade controlFacturaFacade;
@@ -26,10 +26,27 @@ public class ControlFacturaBean implements Serializable{
     private FacturaCompraCabecera facturaCompraCabecera;
     private FacturaInterna facturaInterna;
     private List<ControlFactura> listacontrolFactura = new ArrayList<>();
-    
+
     @PostConstruct
-    public void init(){
-        listacontrolFactura=controlFacturaFacade.findAll();
+    public void init() {
+        listacontrolFactura = controlFacturaFacade.findAll();
+    }
+
+    public String add() {
+        controlFacturaFacade.create(new ControlFactura(id, facturaCompraCabecera, facturaInterna));
+        listacontrolFactura = controlFacturaFacade.findAll();
+        return null;
+    }
+
+    public String delete(ControlFactura c) {
+        controlFacturaFacade.remove(c);
+        listacontrolFactura = controlFacturaFacade.findAll();
+        return null;
+    }
+
+    public void edit(ControlFactura c) {
+        controlFacturaFacade.edit(c);
+        listacontrolFactura = controlFacturaFacade.findAll();
     }
 
     public ControlFacturaFacade getControlFacturaFacade() {
@@ -64,12 +81,12 @@ public class ControlFacturaBean implements Serializable{
         this.facturaInterna = facturaInterna;
     }
 
-    public List<ControlFactura> getListacontrolFactura() {
-        return listacontrolFactura;
+    public ControlFactura[] getList() {
+        return listacontrolFactura.toArray(new ControlFactura[0]);
     }
 
     public void setListacontrolFactura(List<ControlFactura> listacontrolFactura) {
         this.listacontrolFactura = listacontrolFactura;
     }
-    
+
 }
