@@ -54,5 +54,5 @@ public class Consulta implements Serializable {
     public String toString() {
         return "ec.edu.ups.consultoriomedico.modelo.Consulta[ id=" + id + " ]";
     }
-    
+
 }

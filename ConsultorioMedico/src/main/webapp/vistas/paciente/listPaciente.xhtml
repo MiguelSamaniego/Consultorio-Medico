@@ -18,7 +18,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <div class="card">
             <h:form id="frmExclos">
                 <p:growl  id="mensajeGeneral3" sticky="false" showDetail="true"/>   
-                <p:dataTable id="products" var="a" value="#{pacienteBean.listaPacientes()}" editable="true" styleClass="tabla">
+                <p:dataTable id="products" var="a" value="#{pacienteBean.listaPacientes()}" editable="true" 
+                             styleClass="tabla" 
+                             widgetVar="customersTable2"
+                             rows="5"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} Registros"
+                             rowsPerPageTemplate="5,10,{ShowAll|'Todos'}">
                     <p:ajax listener="#{pacienteBean.edit(a)}"  event="rowEdit" update=":frmExclos:mensajeGeneral3"/>
 
                     <p:ajax   event="rowEdit" update=":frmExclos:mensajeGeneral3"/>
@@ -28,27 +35,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             <h1 style="text-align: center;color: white">Lista de Pacientes</h1>
                             <div>
                                 <p:commandButton style="display: block" styleClass="ui-button-success" id="toggler" type="button" value="Columnas" icon="pi pi-align-justify"/>
-                                
+
                                 <p:columnToggler datasource="products" trigger="toggler"/>
                             </div>
                         </div>
                     </f:facet>
-                    <p:column headerText="ID">
+                    <p:column headerText="ID" field="id">
                         <f:facet name="header">Id</f:facet>#{a.id}
                     </p:column>
 
-                    <p:column headerText="Cedula">
+                    <p:column headerText="Cedula" field="cedula">
                         <f:facet name="header">Cedula</f:facet> #{a.cedula}
                     </p:column>
-                    <p:column headerText="Nombres Completos">
-                        <p:cellEditor> 
-                            <f:facet name="output">
-                                <h:outputText value="#{a.nombreCompleto}" />
-                            </f:facet>
-                            <f:facet name="input">
-                                <h:inputText value="#{a.nombreCompleto}" />
-                            </f:facet> 
-                        </p:cellEditor>
+                    <p:column headerText="Nombres" field="nombres">
+                        <!--commen <p:cellEditor> 
+                            <f:facet name="output">t -->
+                        <h:outputText value="#{a.nombreCompleto}" />
+                        <!--    </f:facet>
+                           <f:facet name="input">
+                               <h:inputText value="#{a.nombreCompleto}" />
+                           </f:facet> 
+                       </p:cellEditor> -->
                     </p:column>
                     <p:column headerText="Celular">
                         <p:cellEditor> 
@@ -83,13 +90,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
                     </p:column>
 
-                  
+
                     <p:column headerText="Fecha de Nacimiento">
                         <h:outputText   value="#{a.fechaNacimiento}">
                             <f:convertDateTime pattern="dd-MM-yyyy" />
                         </h:outputText>
                     </p:column>
-                    
+
                     <p:column headerText="Fecha de Ingreso">
                         <h:outputText   value="#{pacienteBean.fechaIngreso(a)}">
                             <f:convertDateTime pattern="dd-MM-yyyy" />

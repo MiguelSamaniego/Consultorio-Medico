@@ -18,10 +18,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <div class="card">
             <h:form id="frmExclos">
                 <p:growl  id="mensajeGeneral3" sticky="false" showDetail="true"/>   
-                <p:dataTable id="products" var="a" value="#{colaboradorBean.listaColaboradores()}" editable="true" styleClass="tabla">
+                <p:dataTable id="products" var="a" value="#{colaboradorBean.listaColaboradores()}" editable="true" styleClass="tabla"  
+                             rows="5"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} Registros"
+                             rowsPerPageTemplate="5,10,{ShowAll|'Todos'}">
                     <p:ajax listener="#{colaboradorBean.edit(a)}"  event="rowEdit" update=":frmExclos:mensajeGeneral3"/>
-
-
                     <f:facet name="header">
                         <div class="p-d-flex p-jc-between p-ai-center">
                             <h1 style="text-align: center;color: white">Lista de Colaboradores</h1>
@@ -36,10 +39,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                         <f:facet name="header">Id</f:facet>#{a.id}
                     </p:column>
 
-                    <p:column headerText="Cedula">
+                    <p:column headerText="Cedula" field="cedula">
                         <f:facet name="header">Cedula</f:facet> #{a.cedula}
                     </p:column>
-                    <p:column headerText="Nombres Completos">
+                    <p:column headerText="Nombres Completos" field="nombres completos">
                         <p:cellEditor> 
                             <f:facet name="output">
                                 <h:outputText value="#{a.nombreCompleto}" />
