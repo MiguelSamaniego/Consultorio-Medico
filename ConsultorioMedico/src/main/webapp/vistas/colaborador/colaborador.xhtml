@@ -6,7 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 <!DOCTYPE html>
 <html  xmlns="http://www.w3.org/1999/xhtml"
        xmlns:h="http://xmlns.jcp.org/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:f="http://java.sun.com/jsf/core"
        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
        xmlns:p="http://primefaces.org/ui"
        >
@@ -106,14 +106,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
                                         <p:inputText id="txtCedula"  placeholder="Cedula:" value="#{colaboradorBean.cedula}" required="true" />
                                     </div>
-                                    
-                                   <p:outputLabel for="txtNombre"  value="Nombre y Apellido:"/>
+
+                                    <p:outputLabel for="txtNombre"  value="Nombre y Apellido:"/>
                                     <div class="ui-inputgroup">
                                         <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
                                         <p:inputText  id="txtNombre" placeholder="Nombre y Apellido:" value="#{colaboradorBean.nombreCompleto}" required="true" />
                                     </div>
-                                   
-                                     <p:outputLabel for="txtCelular"  value="Celular"/>
+
+                                    <p:outputLabel for="txtCelular"  value="Celular"/>
                                     <div class="ui-inputgroup">
                                         <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
                                         <p:inputText id="txtCelular" placeholder="Celular" value="#{colaboradorBean.celular}" required="true" />
@@ -136,23 +136,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
                                         <p:datePicker id="txtFechaNacimiento" pattern="dd-MM-yyyy" value="#{colaboradorBean.fechaNacimiento}" monthNavigator="true" yearNavigator="true" showWeek="true" required="true" />
                                     </div>
-                                    
+
                                     <p:outputLabel  for="txtTipoColaborador" value="Tipo"/>
                                     <div class="ui-inputgroup">
                                         <div class="ui-inputgroup">
-                                        <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
-                                        <p:selectOneMenu id="txtTipoColaborador" value="#{colaboradorBean.tipoColaborador}" required="true" label="Text 2" style="width: 12rem">
-                                            <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
-                                            <f:selectItem itemLabel="Secretario/a" itemValue="Secretario"/>
-                                            <f:selectItem itemLabel="Paramedico" itemValue="Paramedico"/>
-                                            <f:selectItem itemLabel="Enfermero/a" itemValue="Enfermero"/>
-                                        </p:selectOneMenu>
+                                            <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                            <p:selectOneMenu id="txtTipoColaborador" value="#{colaboradorBean.tipoColaborador}" required="true" label="Text 2" style="width: 12rem">
+                                                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
+                                                <f:selectItem itemLabel="Secretario/a" itemValue="Secretario"/>
+                                                <f:selectItem itemLabel="Paramedico" itemValue="Paramedico"/>
+                                                <f:selectItem itemLabel="Enfermero/a" itemValue="Enfermero"/>
+                                            </p:selectOneMenu>
+                                        </div>
                                     </div>
-                                    </div>
-                                    
+
                                 </div>
                             </div>
-                             <div class="container" style=" margin-bottom: 15px" >
+                            <div class="container" style=" margin-bottom: 15px" >
                                 <div class="row">
                                     <div class="col">
                                     </div>

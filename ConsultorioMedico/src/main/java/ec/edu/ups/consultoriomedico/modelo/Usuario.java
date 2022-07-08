@@ -17,8 +17,7 @@ import lombok.ToString;
  *
  * @author edwin
  */
-@Getter
-@Setter
+
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -34,5 +33,45 @@ public class Usuario implements Serializable {
     private String contrasenia;
     private Persona persona;
     private Rol rol;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
 
 }

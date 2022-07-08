@@ -35,13 +35,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
             <p:dialog header="Inicio de Sesion" widgetVar="dlg" resizable="false">
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel for="username" value="Usuario:" />
-                    <p:inputText id="username" value="#{usuarioCLave.usuario.usuario}" required="true" label="username" />
+                    <p:inputText id="username" value="#{usuarioClave.usuario.usuario}" required="true" label="username" />
 
                     <h:outputLabel for="password" value="Contraseña:" />
-                    <p:password id="password" value="#{usuarioCLave.usuario.contrasenia}" required="true" label="password" />
+                    <p:password id="password" value="#{usuarioClave.usuario.contrasenia}" required="true" label="password" />
 
                     <f:facet name="footer">
-                        <p:commandButton value="Ingresar"  action="#{usuarioCLave.iniciarSesion}"
+                        <p:commandButton value="Ingresar"  action="#{usuarioClave.iniciarSesion}"
                                          oncomplete="handleLoginRequest(xhr, status, args)" />
                     </f:facet>  
                 </h:panelGrid>

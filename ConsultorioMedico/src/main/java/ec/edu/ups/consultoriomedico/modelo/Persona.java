@@ -29,7 +29,7 @@ public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nombreCompleto;
     @Column(name = "cedula", nullable = false, unique = true, length = 13)

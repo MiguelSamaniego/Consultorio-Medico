@@ -28,7 +28,7 @@ public class UsuarioClave implements Serializable {
 
     @PostConstruct
     public void init() {
-
+        this.usuario = new Usuario();
     }
 
     public Usuario getUsuario() {
