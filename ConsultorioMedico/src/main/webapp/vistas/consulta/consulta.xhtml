@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       template="/WEB-INF/template.xhtml"
+       >
+    <h:head>
+         <meta content="text/html; charset=utf-8" />
+        <title>CONSULTAS</title>
+    </h:head>
+    <ui:include src="../menu/menu.xhtml" />
+    <h:body>
+        <h:form id="formulario" style="margin:20px;border-style: solid;border-width: 2" >
+            <div class="card">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+
+                        </div>
+                        <div class="col-6">
+                            <div class="container">
+                                <div class="row">
+                                    <h2 style="text-align: center">CONSULTA MEDICA </h2>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p:outputLabel for="txtCedula" value="Cedula del Cliente" />
+                                        <div class="ui-inputgroup">
+                                            <div class="ui-inputgroup-addon"><i class="pi pi-id-card"></i></div>
+                                            <p:inputText id="txtCedula" value="#{consultaBean.cedula}" placeholder="cedula" required="true" />
+                                        </div>
+                                      
+                                    </div>
+                                    <div class="col"> 
+                                        <p:outputLabel for="txtNombre" value="Nombres" />
+                                        <div class="ui-inputgroup">
+                                            <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                            <p:inputText id="txtNombre" placeholder="Nombres" disabled="true"  value="#{consultaBean.paciente.nombreCompleto}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p:outputLabel for="txtFechaNacimiento" value="fecha Nacimiento" />
+                                        <div class="ui-inputgroup">
+                                            <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                            <p:inputText id="txtFechaNacimiento" placeholder="Fecha Nacimiento" disabled="true"  value="#{consultaBean.paciente.fechaNacimiento}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <p:outputLabel for="txtCorreo" value="Correo" />
+                                        <div class="ui-inputgroup">
+                                            <div class="ui-inputgroup-addon"><i class="pi pi-envelope"></i></div>
+                                            <p:inputText id="txtCorreo" placeholder="Correo" disabled="true"  value="#{consultaBean.paciente.email}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p:outputLabel for="txtDireccion" value="Direccion" />
+                                        <div class="ui-inputgroup">
+                                            <div class="ui-inputgroup-addon"><i class="pi pi-home"></i></div>
+                                            <p:inputText id="txtDireccion" placeholder="Direccion" disabled="true"  value="#{consultaBean.paciente.direccion}" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <p:outputLabel for="txtTelefono" value="Telefono" />
+                                        <div class="ui-inputgroup">
+                                            <div class="ui-inputgroup-addon"><i class="pi pi-phone"></i></div>
+                                            <p:inputText id="txtTelefono" placeholder="Telefono"  disabled="true"  value="#{consultaBean.paciente.nombreCompleto}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin:10px 20px">
+                                <p:commandButton  style="margin-right: 20px" icon="pi pi-search"  value="Buscar" styleClass="ui-button-success"   action="#{consultaBean.buscarPaciente(consultaBean.cedula)}"  update="formulario"/>   
+                                <p:commandButton  style="margin-right: 20px"   icon="pi pi-times" value="Cancelar"  styleClass="ui-button-raised ui-button-danger" type="reset"  update="formulario"/> 
+                                <p:commandButton  style="margin-right: 20px"  icon="pi pi-save"  value="Guardar " actionListener="#{growlView.showInfo}"  styleClass="ui-button-raised"  action="#{consultaBean.add}" update="formulario"/>  
+                            </div>
+                        </div>
+                        <div class="col">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </h:form>      
+
+
+
+        <h:form id="nuevo">
+            <p:fieldset  legend="Nueva Prescipcion  "  toggleable="true">
+                <p:panelGrid columns="1">
+                    <p:commandButton value="Nuevo" oncomplete="PF('valor').show();"/>
+                </p:panelGrid>
+            </p:fieldset>
+        </h:form>
+        <p:dialog widgetVar="valor" modal="true" showEffect="clip" header="NuevoRegistro" resizable="false">
+            <h:form id="detalle">
+
+                <p:panelGrid columns="2">
+                   <p:outputLabel value="Medicamento"/>
+                    <p:inputText value="#{consultaBean.medicamento}"/>
+                    <p:outputLabel value="Tiempo de Tratamiento"/>
+                    <p:inputText value="#{consultaBean.tiempoDetratamiento}"/>
+                    
+                     <p:outputLabel value="Intervalo de Tiempo "/>
+                    <p:inputText value="#{consultaBean.intervaloDetiempo}"/>
+                </p:panelGrid>
+                <p:panelGrid columns="1">
+                    <p:commandButton value="Agregar " oncomplete="PF('valor').hide();" 
+                                     update="frmExclos" actionListener="#{consultaBean.addP}"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+        <div class="card">
+            <h:form id="frmExclos">
+                <p:growl  id="mensajeGeneral3" sticky="false" showDetail="true"/>    
+                <p:dataTable id="products" var="s" value="#{consultaBean.listaPrescripcionesDetalle}" styleClass="tabla" editable="true">
+                    <p:ajax listener="#{consultaBean.edit(s)}"  event="rowEdit" update=":frmExclos:mensajeGeneral3"/>
+
+                    <f:facet name="header">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            <h6>Prescripcion</h6>
+                            <div>
+                                <p:commandButton styleClass="ui-button-success" id="toggler" type="button" value="Columnas" icon="pi pi-align-justify"/>
+                                <p:columnToggler datasource="products" trigger="toggler"/>
+                            </div>
+                        </div>
+                    </f:facet>
+                    <p:column headerText="ID">
+                        <f:facet name="header">Id</f:facet>#{s.id} 
+                    </p:column>
+                    <p:column headerText="Medicamento">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{s.medicamento}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{s.medicamento}" />
+                                
+                            </f:facet> 
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Tiempo de Tratamiento">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{s.tiempoDetratamiento}"/>
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{s.tiempoDetratamiento}" size="10"  />
+                            </f:facet> 
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Intervalo de Tiempo">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{s.intervaloDetiempo}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{s.intervaloDetiempo}" size="10" />
+                            </f:facet> 
+                        </p:cellEditor>
+                    </p:column>
+                    
+
+                    <p:column headerText="Eliminar">
+                        <p:commandButton value="Eliminar" action="#{detalleVentaBean.delete(s)}" update="products" styleClass="ui-button-raised ui-button-danger"/>
+                    </p:column>
+                    <p:column headerText="Editar">
+                        <p:rowEditor />
+                    </p:column>
+
+                </p:dataTable>
+                
+
+            </h:form> 
+        </div>
+    </h:body>
+    <ui:include src="../menu/footer.xhtml" />
+</html>

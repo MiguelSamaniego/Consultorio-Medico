@@ -6,14 +6,12 @@ package ec.edu.ups.consultoriomedico.modelo;
 
 import jakarta.persistence.CascadeType;
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,14 +21,14 @@ import lombok.ToString;
 
 /**
  *
- * @author Adrian
+ * @author pcuser
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
 @Entity
-public class Consulta implements Serializable {
+public class PrescripcionDetalle implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -38,19 +36,15 @@ public class Consulta implements Serializable {
     @Getter  @Setter
     private int id;
     @Getter  @Setter
-    private Calendar fecha;
+    private String medicamento;
     @Getter  @Setter
-    private Paciente paciente;
+    private String tiempoDetratamiento;
     @Getter  @Setter
-    private Doctor doctor;
-    @Getter  @Setter
-    private String observaciones;
-    @Getter  @Setter
-    private int tiempo;
-    @OneToOne(cascade = CascadeType.ALL)
+   private String intervaloDetiempo;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
-    @Setter @Getter
-    private PrescripcionCabecera prescripcionCabecera;        
-  
+    private PrescripcionCabecera prescripcionCabecera;
 
+    
+    
 }
