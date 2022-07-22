@@ -32,7 +32,7 @@ public class PrescripcionDetalle implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter  @Setter
     private int id;
     @Getter  @Setter
@@ -41,7 +41,7 @@ public class PrescripcionDetalle implements Serializable {
     private String tiempoDetratamiento;
     @Getter  @Setter
    private String intervaloDetiempo;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn
     private PrescripcionCabecera prescripcionCabecera;
 

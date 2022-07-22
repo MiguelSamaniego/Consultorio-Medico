@@ -60,7 +60,7 @@ public class ConsultaBean implements Serializable {
 
     private int tiempo;
 
-    private List<PrescripcionDetalle> listaPrescripcionesDetalle;
+    private List<PrescripcionDetalle> listaPrescripcionesDetalle=new ArrayList<>();
 
     private List<Consulta> list = new ArrayList<>();
 
@@ -93,6 +93,7 @@ public class ConsultaBean implements Serializable {
     
     
     public void buscarPaciente(String cedula){
+        listaPacientes= pacienteFacade.findAll();
         for (Paciente paciente :listaPacientes) {
             if(paciente.getCedula().equals(cedula)){
                 this.paciente=  paciente;
@@ -103,21 +104,23 @@ public class ConsultaBean implements Serializable {
 
     
     public void  addP(){
-        listaPrescripcionesDetalle.add(new PrescripcionDetalle(0, medicamento, tiempoDetratamiento, intervaloDetiempo, null));
+        PrescripcionDetalle prescripcionDetalle=new PrescripcionDetalle(0, medicamento, tiempoDetratamiento, intervaloDetiempo, null);
+        listaPrescripcionesDetalle.add(prescripcionDetalle);
     }
     
-    public void add(){
-        prescripcionCabecera= new PrescripcionCabecera(0, null);
-        prescripcionCabeceraFacade.create(prescripcionCabecera);
+    public void crearConsulta(){
+        PrescripcionCabecera cabecera = new PrescripcionCabecera("Esto es una observacion");
+   
+        prescripcionCabeceraFacade.create(cabecera);
         for (PrescripcionDetalle prescripcionDetalle1 : listaPrescripcionesDetalle) {
-            PrescripcionDetalle detalle= new PrescripcionDetalle(prescripcionDetalle1.getId(), prescripcionDetalle1.getMedicamento(), prescripcionDetalle1.getTiempoDetratamiento(), prescripcionDetalle1.getTiempoDetratamiento(), prescripcionCabecera);
-            prescripcionDetalleFacade.create(prescripcionDetalle);
+            PrescripcionDetalle detalle= new PrescripcionDetalle(0, prescripcionDetalle1.getMedicamento(), prescripcionDetalle1.getTiempoDetratamiento(), prescripcionDetalle1.getTiempoDetratamiento(), cabecera);
+            prescripcionDetalleFacade.create(detalle);
         }
-        prescripcionCabecera.setListaPrescripcionesDetalle(listaPrescripcionesDetalle);
-        prescripcionCabeceraFacade.edit(prescripcionCabecera);
+        cabecera.setListaPrescripcionesDetalle(listaPrescripcionesDetalle);
+        prescripcionCabeceraFacade.edit(cabecera);
         
         
-        consulta= new Consulta(0, new GregorianCalendar(), paciente, doctor, observaciones, 60, prescripcionCabecera);
+        consulta= new Consulta(0, new GregorianCalendar(), paciente, null, null, 60, cabecera);
         consultaFacade.create(consulta);
         
     }

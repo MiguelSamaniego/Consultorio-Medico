@@ -74,7 +74,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <p:outputLabel for="txtTelefono" value="Telefono" />
                                         <div class="ui-inputgroup">
                                             <div class="ui-inputgroup-addon"><i class="pi pi-phone"></i></div>
-                                            <p:inputText id="txtTelefono" placeholder="Telefono"  disabled="true"  value="#{consultaBean.paciente.nombreCompleto}"/>
+                                            <p:inputText id="txtTelefono" placeholder="Telefono"  disabled="true"  value="#{consultaBean.paciente.celular}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             <div style="margin:10px 20px">
                                 <p:commandButton  style="margin-right: 20px" icon="pi pi-search"  value="Buscar" styleClass="ui-button-success"   action="#{consultaBean.buscarPaciente(consultaBean.cedula)}"  update="formulario"/>   
                                 <p:commandButton  style="margin-right: 20px"   icon="pi pi-times" value="Cancelar"  styleClass="ui-button-raised ui-button-danger" type="reset"  update="formulario"/> 
-                                <p:commandButton  style="margin-right: 20px"  icon="pi pi-save"  value="Guardar " actionListener="#{growlView.showInfo}"  styleClass="ui-button-raised"  action="#{consultaBean.add}" update="formulario"/>  
+                                <p:commandButton  style="margin-right: 20px"  icon="pi pi-save"  value="Guardar "   styleClass="ui-button-raised"  action="#{consultaBean.crearConsulta}" update="formulario"/>  
                             </div>
                         </div>
                         <div class="col">

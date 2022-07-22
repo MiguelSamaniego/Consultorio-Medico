@@ -4,14 +4,16 @@
  */
 package ec.edu.ups.consultoriomedico.modelo;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import java.io.Serializable;
-import java.util.List;
-import jakarta.persistence.Entity;
+import javax.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,24 +29,28 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Entity
-public class PrescripcionCabecera implements Serializable {
+@jakarta.persistence.Entity
+public class Cita implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter  @Setter
     private int id;
+    @OneToOne
+    @JoinColumn
     @Getter  @Setter
-    private String observacion;
+    private Paciente paciente;
+    @OneToOne
+    @JoinColumn
+    @Getter  @Setter
+    private Doctor doctor;
+    @Temporal(TemporalType.DATE)
+    @Getter  @Setter
+    private Date fecha;
+    @Getter  @Setter
+    private String hora;
+    
 
     
-    @Getter  @Setter
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescripcionCabecera")
-    private List<PrescripcionDetalle> listaPrescripcionesDetalle;
-
-   public PrescripcionCabecera(String observacion) {
-        this.observacion = observacion;
-    }
     
 }
