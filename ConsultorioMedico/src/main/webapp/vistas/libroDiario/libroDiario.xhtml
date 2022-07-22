@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       template="/WEB-INF/template.xhtml">
+    <h:head>
+        <title>Libro Diario</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <ui:include src="../menu/menu.xhtml" />
+    <h:body>
+        <div class="card">
+            <h:form id="frmExclos">
+                <p:growl  id="mensajeGeneral3" sticky="false" showDetail="true"/>   
+                <p:dataTable id="libros" var="a" value="#{libroDiariobean.listaLibrosdiarios()}" editable="true" styleClass="tabla">
+                    <p:ajax listener="#{libroDiariobean.edit(a)}"  event="rowEdit" update=":frmExclos:mensajeGeneral3"/>
+
+                    <p:ajax   event="rowEdit" update=":frmExclos:mensajeGeneral3"/>
+
+                    <f:facet name="header">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            <h1 style="text-align: center;color: white">Libro Diario</h1>
+                            <div>
+                                <p:commandButton style="display: block" styleClass="ui-button-success" id="toggler" type="button" value="Columnas" icon="pi pi-align-justify"/>
+                                <p:columnToggler datasource="libros" trigger="toggler"/>
+                            </div>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="ID">
+                        <f:facet name="header">Id</f:facet>#{a.id}
+                    </p:column>
+
+                    <p:column headerText="Fecha">
+                      <p:outputLabel value="#{a.fecha}"><f:convertDateTime pattern="dd-MM-yyyy" /></p:outputLabel>
+                    </p:column>
+                   
+                    <p:column headerText="Eliminar">
+                        <p:commandButton value="Eliminar" action="#{libroDiariobean.delete(a)}" update="libros" styleClass="ui-button-raised ui-button-danger"/>
+                    </p:column>
+                    <p:column headerText="Editar">
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </h:body>
+    <ui:include src="../menu/footer.xhtml" />
+</html>

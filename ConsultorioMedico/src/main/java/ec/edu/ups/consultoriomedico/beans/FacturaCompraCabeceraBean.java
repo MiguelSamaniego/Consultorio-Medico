@@ -28,11 +28,14 @@ public class FacturaCompraCabeceraBean implements Serializable{
     @PostConstruct
     public void init() {
         listaFacturaCompraC = facturaCompraCabeceraFacade.findAll();
+        fecha = new Date();
     }
 
     public FacturaCompraCabeceraFacade getFacturaCompraCabeceraFacade() {
         return facturaCompraCabeceraFacade;
     }
+
+
 
     public void setFacturaCompraCabeceraFacade(FacturaCompraCabeceraFacade facturaCompraCabeceraFacade) {
         this.facturaCompraCabeceraFacade = facturaCompraCabeceraFacade;

@@ -28,7 +28,8 @@ import java.util.List;
 @Named
 @SessionScoped
 public class CitaBean implements Serializable {
-     private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
     @EJB
     private CitaFacade citaFacade;
     @EJB
@@ -47,31 +48,33 @@ public class CitaBean implements Serializable {
     @PostConstruct
     public void init() {
         list = citaFacade.findAll();
-        listPacientes=pacienteFacade.findAll();
-        listDoctores=doctorFacade.findAll();
-        this.doctor= new Doctor();
+        listPacientes = pacienteFacade.findAll();
+        listDoctores = doctorFacade.findAll();
+        this.doctor = new Doctor();
     }
-    
-    public void add(){
+
+    public void add() {
         buscarPaciente(cedula);
         Cita cita = new Cita(0, paciente, doctor, fecha, hora);
         citaFacade.create(cita);
-        
+        list = citaFacade.findAll();
+
     }
-    
+
     public String edit(Cita cita) {
         citaFacade.edit(cita);
         list = citaFacade.findAll();
         return null;
     }
-    public void buscarPaciente(String cedula){
-        listPacientes= pacienteFacade.findAll();
-        for (Paciente paciente :listPacientes) {
-            if(paciente.getCedula().equals(cedula)){
-                this.paciente=  paciente;
+
+    public void buscarPaciente(String cedula) {
+        listPacientes = pacienteFacade.findAll();
+        for (Paciente paciente : listPacientes) {
+            if (paciente.getCedula().equals(cedula)) {
+                this.paciente = paciente;
             }
         }
-       
+
     }
 
     public String getCedula() {
@@ -81,9 +84,6 @@ public class CitaBean implements Serializable {
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-
-
-    
 
     public CitaFacade getCitaFacade() {
         return citaFacade;
@@ -164,9 +164,5 @@ public class CitaBean implements Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    
-    
-    
-    
-    
+
 }

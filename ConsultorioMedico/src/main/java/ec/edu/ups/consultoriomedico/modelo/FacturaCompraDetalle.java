@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 /**
  *
@@ -23,7 +25,8 @@ public class FacturaCompraDetalle implements Serializable {
     private int cantidad;
     private double precio;
     private double total;
-
+    @ManyToOne
+    private FacturaCompraCabecera cabeceraCompra;
     public FacturaCompraDetalle() {
     }
 
@@ -34,6 +37,31 @@ public class FacturaCompraDetalle implements Serializable {
         this.precio = precio;
         this.total = total;
     }
+
+    public FacturaCompraDetalle(String producto, int cantidad, double precio) {
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.precio = precio;
+    }
+
+    public FacturaCompraDetalle(int id, String producto, int cantidad, double precio, double total, FacturaCompraCabecera cabeceraCompra) {
+        this.id = id;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.total = total;
+        this.cabeceraCompra = cabeceraCompra;
+    }
+
+    public FacturaCompraCabecera getCabeceraCompra() {
+        return cabeceraCompra;
+    }
+
+    public void setCabeceraCompra(FacturaCompraCabecera cabeceraCompra) {
+        this.cabeceraCompra = cabeceraCompra;
+    }
+
+
     
     
     public int getId() {

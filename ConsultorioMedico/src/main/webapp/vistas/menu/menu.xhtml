@@ -39,10 +39,24 @@
                     </p:submenu>
 
                     <p:divider layout="vertical"/>
+                    <p:submenu label="Citas" icon="pi pi-user">
+                        <p:menuitem value="Nueva Cita" icon="pi pi-fw pi-plus"  url="../cita/cita.xhtml"/>
+                        <p:divider />
+                        <p:menuitem value="Listar Citas" icon="pi pi-fw pi-list" url="../cita/listCita.xhtml"/>
+                    </p:submenu>
+
+                    <p:divider layout="vertical"/>
+                    <p:submenu label="Consultas" icon="pi pi-user">
+                        <p:menuitem value="Nueva Consulta" icon="pi pi-fw pi-plus"  url="../consulta/consulta.xhtml"/>
+                        <p:divider />
+                        <p:menuitem value="Listar Consultas" icon="pi pi-fw pi-list" url="../consulta/listConsulta.xhtml"/>
+                    </p:submenu>
+
+                    <p:divider layout="vertical"/>
                     <p:submenu label="Facturas" icon="pi pi-file">
 
                         <p:submenu label="Factura Compra" icon="pi pi-fw pi-plus">
-                            <p:menuitem value="Nueva Factura" icon="pi pi-fw pi-bookmark"/>
+                            <p:menuitem value="Nueva Factura" icon="pi pi-fw pi-bookmark" url="../factura/facturaCompra.xhtml"/>
                             <p:menuitem value="Listar Facturas" icon="pi pi-fw pi-list"/>
                         </p:submenu>
                         <p:divider />
@@ -51,15 +65,26 @@
                             <p:menuitem value="Listar Facturas" icon="pi pi-fw pi-list"/>
                         </p:submenu>
                     </p:submenu> 
+
+                    <p:divider layout="vertical"/>
+                    <p:submenu label="Reportes" icon="pi pi-file">
+                        <p:menuitem value="Historia Clinica" icon="pi pi-fw pi-list"  url="../historiaClinica/historiaClinica.xhtml"/>
+                        <p:divider />
+                        <p:menuitem value="Libro Diario" icon="pi pi-fw pi-list" url="../libroDiario/libroDiario.xhtml"/>
+                    </p:submenu>
+
+
+
+
                     <p:divider layout="vertical"/>
                     <p:submenu label="Usuarios" icon="pi pi-user">
                         <p:menuitem value="Nuevo Usuario" icon="pi pi-fw pi-plus"  url="../usuario/usuario.xhtml"/>
                         <p:divider />
                         <p:menuitem value="Listar Usuarios" icon="pi pi-fw pi-list" url="../usuario/listUsuario.xhtml"/>
                     </p:submenu>
-                    <p:menuitem value="Salir" actionListener="#{cerrarS.cerrarSesion}" action="/Login?faces-redirect=true" icon="pi pi-fw pi-sign-in" />
+                    <p:menuitem value="Salir" actionListener="#{cerrarS.cerrarSesion}" url="../Login.xhtml"  action="/Login?faces-redirect=true" icon="pi pi-fw pi-sign-in" />
                     <p:divider layout="vertical"/>
-
+ 
                 </p:menubar>
 
             </h:form>

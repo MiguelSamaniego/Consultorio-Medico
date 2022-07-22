@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       >
+    <h:head>
+        <title>Factura de Compra</title>
+    </h:head>
+    <ui:include src="../menu/menu.xhtml" />
+    <h:body>
+        <script type="text/javascript">
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                millisecondText: 'Milisegundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText: 'Todo el día',
+                today: 'Hoy',
+                clear: 'Claro'
+            };
+            PrimeFaces.locales ['de'] = {
+                closeText: 'Schließen',
+                prevText: 'Zurück',
+                nextText: 'Weiter',
+                monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+                dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+                dayNamesShort: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
+                dayNamesMin: ['S', 'M', 'D', 'M ', 'D', 'F ', 'S'],
+                weekHeader: 'Woche',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Nur Zeit',
+                timeText: 'Zeit',
+                hourText: 'Stunde',
+                minuteText: 'Minute',
+                secondText: 'Sekunde',
+                millisecondText: 'Millisekunde',
+                currentText: 'Aktuelles Datum',
+                ampm: false,
+                month: 'Monat',
+                week: 'Woche',
+                day: 'Tag',
+                allDayText: 'Ganzer Tag',
+                today: 'Heute',
+                clear: 'Löschen'
+            };
+        </script>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            function dateTemplateFunc(date) {
+                return '<span style="background-color:' + ((date.day < 21 && date.day > 10) ? '#81C784' : 'inherit') + ';border-radius:50%;width: 2.5rem;height: 2.5rem;line-height: 2.5rem;display: flex;align-items: center;justify-content: center;">' + date.day + '</span>';
+            }
+
+            //]]>
+        </script>
+
+        <style type="text/css">
+            .value {
+                font-weight: bold;
+            }
+        </style>
+        <div >
+            <div class="row">
+                <div class="col"></div>
+                <div class="card">
+                    <h:form id="formulario"  >
+                        <p:growl id="messages"/>
+
+                        <h2 style="text-align: center">Emisión de Factura de Compra</h2>
+                        <div class="p-grid ui-fluid">
+                            <div class="p-col-12 p-md-4">
+                                <!--<p:outputLabel style="float:left"  for="txtFechaEmision" value="Fecha de Emision"/>-->
+                                <div style="padding: 51px; width: 350px; float: right" class="ui-inputgroup" >
+                                    <div  class="ui-inputgroup-addon"><i class="pi pi-user" ></i></div>
+                                    <p:datePicker  id="txtFechaEmision" pattern="dd-MM-yyyy" value="#{facturaCompraCabeceraBean.fecha}" monthNavigator="true" yearNavigator="true" showWeek="true" required="true" placeholder="Fecha de Emision"/>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </h:form>
+                </div>
+                <h:form id="nuevo">
+                    <p:fieldset  legend="Agregar nuevo Insumo"  toggleable="true">
+                        <p:panelGrid columns="1">
+                            <p:commandButton value="Nuevo" oncomplete="PF('valor').show();"/>
+                        </p:panelGrid>
+                    </p:fieldset>
+                </h:form>
+                <p:dialog widgetVar="valor" modal="true" showEffect="clip" header="NuevoRegistro" resizable="false">
+                    <f:facet name="header">
+                        <span>Lista de Insumos a añadir</span>
+                    </f:facet>
+
+                    <h:form id="detalle">
+
+                        <p:outputLabel for="txtProducto" value="Nombre del Producto" />
+                        <div class="ui-inputgroup">
+                            <div class="ui-inputgroup-addon"><i class="pi pi-id-card"></i></div>
+                            <p:inputText id="txtProducto" value="#{facturaCompraDetalleBean.producto}" placeholder="Ingrese el producto" required="true" />
+                        </div>
+
+                        <p:outputLabel for="txtCantidad" value="Cantidad" />
+                        <div class="ui-inputgroup">
+                            <div class="ui-inputgroup-addon"><i class="pi pi-id-card"></i></div>
+                            <p:inputText id="txtCantidad" value="#{facturaCompraDetalleBean.cantidad}" placeholder="Ingrese la cantidad" required="true" />
+                        </div>
+
+                        <p:outputLabel for="txtPrecio" value="Precio" />
+                        <div class="ui-inputgroup">
+                            <div class="ui-inputgroup-addon"><i class="pi pi-id-card"></i></div>
+                            <p:inputText id="txtPrecio" value="#{facturaCompraDetalleBean.precio}" placeholder="Ingrese el precio" required="true" />
+                        </div>
+
+
+                        <div style="margin:10px 20px">
+                            <p:commandButton  style="margin-right: 20px"  icon="pi pi-save"  value="Añadir Detalle " actionListener="#{facturaCompraDetalleBean.add2}"  styleClass="ui-button-raised"  update="frmExclos" oncomplete="PF('valor').hide();" /> 
+                            <p:commandButton  style="margin-right: 20px"   icon="pi pi-times" value="Cancelar"  styleClass="ui-button-raised ui-button-danger" type="reset"  update="formulario"/> 
+                        </div>
+                    </h:form>
+                </p:dialog>
+                <div class="card">
+                    <h:form id="frmExclos">
+                        <p:growl  id="mensajeGeneral3" sticky="false" showDetail="true"/>    
+                        <p:dataTable id="products" var="s" value="#{facturaCompraDetalleBean.listaenBlanco}" styleClass="tabla" editable="true">
+                            <p:ajax listener="#{facturaCompraDetalleBean.edit(s)}"  event="rowEdit" update=":frmExclos:mensajeGeneral3"/>
+
+                            <f:facet name="header">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    <h6>Detalles</h6>
+                                    <div>
+                                        <p:commandButton styleClass="ui-button-success" id="toggler" type="button" value="Columnas" icon="pi pi-align-justify"/>
+                                        <p:columnToggler datasource="products" trigger="toggler"/>
+                                    </div>
+                                </div>
+                            </f:facet>
+
+                            <p:column headerText="Producto">
+                                <p:cellEditor> 
+                                    <f:facet name="output">
+                                        <h:outputText value="#{s.producto}"  />
+                                    </f:facet> 
+                                    <f:facet name="input">
+                                        <h:inputText value="#{s.producto}" />
+                                    </f:facet> 
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Cantidad">
+                                <p:cellEditor> 
+                                    <f:facet name="output">
+                                        <h:outputText value="#{s.cantidad}"/>
+                                    </f:facet> 
+                                    <f:facet name="input">
+                                        <h:inputText value="#{s.cantidad}" size="10"  />
+                                    </f:facet> 
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Precio">
+                                <p:cellEditor> 
+                                    <f:facet name="output">
+                                        <h:outputText value="#{s.precio}"  />
+                                    </f:facet> 
+                                    <f:facet name="input">
+                                        <h:inputText value="#{s.precio}" size="10" />
+                                    </f:facet> 
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Subtotal">
+                                <p:cellEditor> 
+                                    <f:facet name="output">
+                                        <h:outputText value="#{s.total}" />
+                                    </f:facet> 
+                                    <f:facet name="input">
+                                        <h:inputText value="#{s.total}" size="10" />
+                                    </f:facet> 
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Eliminar">
+                                <p:commandButton value="Eliminar" action="#{facturaCompraDetalleBean.delete(s)}" update="products" styleClass="ui-button-raised ui-button-danger"/>
+                            </p:column>
+                            <p:column headerText="Editar">
+                                <p:rowEditor />
+                            </p:column>
+
+                        </p:dataTable>
+                        <div style="display: inline;  float: right; margin-left:   auto; margin-right: auto">
+                            <p:panelGrid columns="2">
+                                <p:outputLabel style="width: 100px" value="Total"/>
+                                <p:outputLabel style="width: 100px"  value="#{facturaCompraDetalleBean.totalFinal}"/>
+
+                            </p:panelGrid>
+
+
+                        </div>
+                        <br></br><br></br><br></br>
+                        <div style="display: block;  float: right; margin-left:   auto; margin-right: auto">
+                            <p:panelGrid columns="2">
+                                <p:commandButton   value="Emitir Factura" icon="pi pi-save"    actionListener="#{growlView.showInfo}"  styleClass="ui-button-raised"  action="#{facturaCompraDetalleBean.guardarFactura}" update="frmExclos"/> 
+                            </p:panelGrid>
+                        </div>
+                    </h:form> 
+                </div>
+
+
+            </div>
+        </div>
+    </h:body>
+    <ui:include src="../menu/footer.xhtml" />
+</html>

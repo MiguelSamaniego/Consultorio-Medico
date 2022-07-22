@@ -138,7 +138,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                     <div class="col">
                                     </div>
                                     <div class="col">
-                                        <p:commandButton  style="margin-right: 20px"  update=":mensaje formulario"  value="Guardar" styleClass="ui-button-raised"  action="#{citaBean.add}" />   
+                                        <p:commandButton  style="margin-right: 20px"  update=":mensaje formulario"  value="Guardar" styleClass="ui-button-raised" actionListener="#{growlView.showInfo}" action="#{citaBean.add}" />   
 
                                     </div>
                                     <div class="col">

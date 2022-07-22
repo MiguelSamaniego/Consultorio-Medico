@@ -32,6 +32,7 @@ public class Usuario implements Serializable {
     private String usuario;
     private String contrasenia;
     private Persona persona;
+    @Enumerated
     private Rol rol;
 
     public int getId() {

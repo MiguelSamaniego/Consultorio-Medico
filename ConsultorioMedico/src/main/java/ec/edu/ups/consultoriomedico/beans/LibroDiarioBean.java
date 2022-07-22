@@ -52,6 +52,13 @@ public class LibroDiarioBean implements Serializable {
         libroDiarioFacade.edit(l);
         listaLibrosdiarios = libroDiarioFacade.findAll();
     }
+    
+//    public Date asignarFecha(LibroDiario l){
+//        Date d = new Date();
+//        if (true) {
+//            
+//        }else {
+//    }
 
     public LibroDiarioFacade getLibroDiarioFacade() {
         return libroDiarioFacade;
