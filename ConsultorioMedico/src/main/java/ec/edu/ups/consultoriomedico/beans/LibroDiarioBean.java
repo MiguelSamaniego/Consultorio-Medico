@@ -30,6 +30,8 @@ public class LibroDiarioBean implements Serializable {
     private Date fecha;
     private List<FacturaInterna> listaFacturas;
     private List<LibroDiario> listaLibrosdiarios = new ArrayList<>();
+    private double valor;
+    private String signo;
 
     @PostConstruct
     public void init() {
@@ -37,7 +39,7 @@ public class LibroDiarioBean implements Serializable {
     }
 
     public String add() {
-        libroDiarioFacade.create(new LibroDiario(id, fecha, listaFacturas));
+        libroDiarioFacade.create(new LibroDiario(id, fecha, valor, signo, listaFacturas));
         listaLibrosdiarios = libroDiarioFacade.findAll();
         return null;
     }
@@ -52,14 +54,13 @@ public class LibroDiarioBean implements Serializable {
         libroDiarioFacade.edit(l);
         listaLibrosdiarios = libroDiarioFacade.findAll();
     }
-    
+
 //    public Date asignarFecha(LibroDiario l){
 //        Date d = new Date();
 //        if (true) {
 //            
 //        }else {
 //    }
-
     public LibroDiarioFacade getLibroDiarioFacade() {
         return libroDiarioFacade;
     }
@@ -78,6 +79,22 @@ public class LibroDiarioBean implements Serializable {
 
     public Date getFecha() {
         return fecha;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public String getSigno() {
+        return signo;
+    }
+
+    public void setSigno(String signo) {
+        this.signo = signo;
     }
 
     public void setFecha(Date fecha) {

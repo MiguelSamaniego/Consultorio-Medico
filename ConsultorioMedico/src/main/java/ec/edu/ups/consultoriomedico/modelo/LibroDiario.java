@@ -25,18 +25,37 @@ public class LibroDiario implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private Date fecha;
+    private double valor;
+    private String signo;
     private List<FacturaInterna> listaFacturas;
 
-    public LibroDiario(int id, Date fecha, List<FacturaInterna> listaFacturas) {
+    public LibroDiario(int id, Date fecha, double valor, String signo, List<FacturaInterna> listaFacturas) {
         this.id = id;
         this.fecha = fecha;
+        this.valor = valor;
+        this.signo = signo;
         this.listaFacturas = listaFacturas;
     }
 
+    public String getSigno() {
+        return signo;
+    }
+
+    public void setSigno(String signo) {
+        this.signo = signo;
+    }
+ 
     public LibroDiario() {
     }
-    
-    
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
     public int getId() {
         return id;
     }
@@ -86,6 +105,4 @@ public class LibroDiario implements Serializable {
         return "LibroDiario{" + "id=" + id + ", fecha=" + fecha + ", listaFacturas=" + listaFacturas + '}';
     }
 
- 
-    
 }

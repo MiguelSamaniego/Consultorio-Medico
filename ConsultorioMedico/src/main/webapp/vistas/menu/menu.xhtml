@@ -57,7 +57,7 @@
 
                         <p:submenu label="Factura Compra" icon="pi pi-fw pi-plus">
                             <p:menuitem value="Nueva Factura" icon="pi pi-fw pi-bookmark" url="../factura/facturaCompra.xhtml"/>
-                            <p:menuitem value="Listar Facturas" icon="pi pi-fw pi-list"/>
+                            <p:menuitem value="Listar Facturas" icon="pi pi-fw pi-list" url="../factura/listFacturaCompra.xhtml"/>
                         </p:submenu>
                         <p:divider />
                         <p:submenu label="Factura Venta" icon="pi pi-fw pi-plus">
@@ -80,7 +80,6 @@
                     <p:submenu label="Usuarios" icon="pi pi-user">
                         <p:menuitem value="Nuevo Usuario" icon="pi pi-fw pi-plus"  url="../usuario/usuario.xhtml"/>
                         <p:divider />
-                        <p:menuitem value="Listar Usuarios" icon="pi pi-fw pi-list" url="../usuario/listUsuario.xhtml"/>
                     </p:submenu>
                     <p:menuitem value="Salir" actionListener="#{cerrarS.cerrarSesion}" url="../Login.xhtml"  action="/Login?faces-redirect=true" icon="pi pi-fw pi-sign-in" />
                     <p:divider layout="vertical"/>

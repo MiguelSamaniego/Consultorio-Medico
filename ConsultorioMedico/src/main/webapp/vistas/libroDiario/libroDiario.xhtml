@@ -35,9 +35,25 @@
                     </p:column>
 
                     <p:column headerText="Fecha">
-                      <p:outputLabel value="#{a.fecha}"><f:convertDateTime pattern="dd-MM-yyyy" /></p:outputLabel>
+                        <p:outputLabel value="#{a.fecha}"><f:convertDateTime pattern="dd-MM-yyyy" /></p:outputLabel>
                     </p:column>
-                   
+
+                    <p:column headerText="Producto/Servicio">
+                        <p:outputLabel value="#{a.fecha}"><f:convertDateTime pattern="dd-MM-yyyy" /></p:outputLabel>
+                    </p:column>
+
+                    <p:column headerText="Valor">
+                        <p:outputLabel value="#{a.fecha}"><f:convertDateTime pattern="dd-MM-yyyy" /></p:outputLabel>
+                    </p:column>
+
+                    <p:column headerText="Ingreso/Egreso" style="width: 100px">
+                        <h:outputText value="#{k.signo}"/>
+                    </p:column>
+
+                    <p:column headerText="Total" style="width: 100px">
+                        <h:outputText value="#{k.signo}"/>
+                    </p:column>
+
                     <p:column headerText="Eliminar">
                         <p:commandButton value="Eliminar" action="#{libroDiariobean.delete(a)}" update="libros" styleClass="ui-button-raised ui-button-danger"/>
                     </p:column>

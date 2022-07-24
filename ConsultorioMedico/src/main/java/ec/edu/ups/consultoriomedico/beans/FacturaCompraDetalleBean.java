@@ -6,8 +6,10 @@ package ec.edu.ups.consultoriomedico.beans;
 
 import ec.edu.ups.consultoriomedico.facade.FacturaCompraCabeceraFacade;
 import ec.edu.ups.consultoriomedico.facade.FacturaCompraDetalleFacade;
+import ec.edu.ups.consultoriomedico.facade.LibroDiarioFacade;
 import ec.edu.ups.consultoriomedico.modelo.FacturaCompraCabecera;
 import ec.edu.ups.consultoriomedico.modelo.FacturaCompraDetalle;
+import ec.edu.ups.consultoriomedico.modelo.LibroDiario;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
@@ -29,6 +31,8 @@ public class FacturaCompraDetalleBean implements Serializable {
     private FacturaCompraDetalleFacade facturacompraDetalleFacade;
     @EJB
     private FacturaCompraCabeceraFacade facturaCompraCabeceraFacade;
+    @EJB
+    private LibroDiarioFacade libroDiarioFacade;
     private int id;
     private String producto;
     private int cantidad;
@@ -36,24 +40,26 @@ public class FacturaCompraDetalleBean implements Serializable {
     private double total;
     private FacturaCompraCabecera cabeceraCompra;
     private double totalFinal;
+    private List<LibroDiario> libroDiario = new ArrayList<>();
     private List<FacturaCompraCabecera> listaCabeceraCom = new ArrayList<>();
     private List<FacturaCompraDetalle> listaenBlanco = new ArrayList<>();
 
     @PostConstruct
     public void init() {
         listaenBlanco = new ArrayList<>();
-  
+//        libroDiario = libroDiarioFacade.findAll();
     }
 
     public String guardarFactura() {
         FacturaCompraCabecera fc = new FacturaCompraCabecera(id, new Date(), totalFinal);
-        System.out.println("holagfdgdfgfdg "+fc + id);
+        System.out.println("holagfdgdfgfdg " + fc + id);
         facturaCompraCabeceraFacade.create(fc);
         for (FacturaCompraDetalle det : listaenBlanco) {
-            
+
             facturacompraDetalleFacade.create(det);
             det.setCabeceraCompra(fc);
             facturacompraDetalleFacade.edit(det);
+//            libroDiarioFacade.create(new LibroDiario(id, new Date(), det.getTotal(), "+", det.ge));  
         }
         fc.setListaFacturaCompraDetalle(listaenBlanco);
         facturaCompraCabeceraFacade.edit(fc);
@@ -80,9 +86,14 @@ public class FacturaCompraDetalleBean implements Serializable {
         }
     }
 
-    public double obtenerTotalFinal() {
-
-        return totalFinal;
+    public double calcularTotalKardex() {
+        libroDiario = libroDiarioFacade.findAll();
+        double valor = 0;
+        for (LibroDiario l : libroDiario) {
+            valor = l.getValor();
+        }
+        libroDiario = libroDiarioFacade.findAll();
+        return valor;
     }
 
     public String delete(FacturaCompraDetalle s) {
@@ -112,6 +123,22 @@ public class FacturaCompraDetalleBean implements Serializable {
 
     public void setListaenBlanco(List<FacturaCompraDetalle> listaenBlanco) {
         this.listaenBlanco = listaenBlanco;
+    }
+
+    public LibroDiarioFacade getLibroDiarioFacade() {
+        return libroDiarioFacade;
+    }
+
+    public void setLibroDiarioFacade(LibroDiarioFacade libroDiarioFacade) {
+        this.libroDiarioFacade = libroDiarioFacade;
+    }
+
+    public List<LibroDiario> getLibroDiario() {
+        return libroDiario;
+    }
+
+    public void setLibroDiario(List<LibroDiario> libroDiario) {
+        this.libroDiario = libroDiario;
     }
 
     public String getProducto() {
@@ -177,7 +204,5 @@ public class FacturaCompraDetalleBean implements Serializable {
     public void setTotal(double total) {
         this.total = total;
     }
-
- 
 
 }
